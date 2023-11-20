@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.frozenblock.liukrast.schematicdisplay.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.schematic_display.refmap.json",
+  "mixins": [
+    "ItemEmiStackMixin"
+  ],
+  "client": [
+    "AbstractSimiScreenMixin",
+    "ClipboardScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

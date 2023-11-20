@@ -1,0 +1,2 @@
+package net.frozenblock.liukrast.schematicdisplay.mixin;public class AbstractSimiScreenMixin {
+}
