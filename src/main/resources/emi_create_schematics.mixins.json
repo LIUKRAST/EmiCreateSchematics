@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "net.frozenblock.liukrast.schematicdisplay.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "mixins.schematic_display.refmap.json",
+  "refmap": "mixins.emi_create_schematics.refmap.json",
   "mixins": [
     "ItemEmiStackMixin"
   ],
