@@ -21,21 +21,19 @@ public class ClipboardScreenMixin extends Screen {
     @Shadow
     public ItemStack item;
 
-    protected ClipboardScreenMixin(Component p_96550_) {
+    protected ClipboardScreenMixin(final Component p_96550_) {
         super(p_96550_);
     }
 
-
     @Inject(at = @At("TAIL"), method = "init")
-    private void init(CallbackInfo ci) {
+    private void init(final CallbackInfo ci) {
         if(ClipboardScreenUtils.load(item.getTag(), false)) {
-            int x = ((AbstractSimiScreenMixin) this).getGuiLeft();
-            int y = ((AbstractSimiScreenMixin) this).getGuiTop() - 8;
-            IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)
+            final int x = ((AbstractSimiScreenMixin) this).getGuiLeft();
+            final int y = ((AbstractSimiScreenMixin) this).getGuiTop() - 8;
+            final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)
                     .withCallback(() -> {
-                        if (item.getItem() instanceof ClipboardBlockItem) {
+                        if (item.getItem() instanceof ClipboardBlockItem)
                             ClipboardScreenUtils.load(item.getTag(), true);
-                        }
                     });
             customButton.setToolTip(Components.translatable("gui." + SchematicDisplay.MOD_ID + ".clipboard.favourite"));
             this.addRenderableWidget(customButton);
