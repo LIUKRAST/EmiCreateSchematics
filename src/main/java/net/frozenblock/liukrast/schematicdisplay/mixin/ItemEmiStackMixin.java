@@ -10,18 +10,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("all")
 @Mixin(ItemEmiStack.class)
-public class ItemEmiStackMixin {
-
+public final class ItemEmiStackMixin {
     @Inject(at = @At("TAIL"), method = "render", remap = false)
-    private void render(PoseStack matrices, int x, int y, float delta, int flags, CallbackInfo ci) {
-        EmiDrawContext context = EmiDrawContext.wrap(matrices);
+    private void render(final PoseStack matrices,
+                        final int x, final int y,
+                        final float delta,
+                        final int flags,
+                        final CallbackInfo ci) {
+        final EmiDrawContext context = EmiDrawContext.wrap(matrices);
         if ((flags) != 0) {
-            String count = "";
-            if (((ItemEmiStack)(Object)this).getAmount() != 1) {
-                count += ((ItemEmiStack)(Object)this).getAmount();
-            }
-            EmiRenderHelper.renderAmount(context, x, y, EmiPort.literal(count));
+            final StringBuilder bob = new StringBuilder();
+            if (((ItemEmiStack)(Object)this).getAmount() != 1)
+                bob.append(((ItemEmiStack)(Object)this).getAmount());
+            EmiRenderHelper.renderAmount(context, x, y, EmiPort.literal(bob.toString()));
         }
     }
 }
