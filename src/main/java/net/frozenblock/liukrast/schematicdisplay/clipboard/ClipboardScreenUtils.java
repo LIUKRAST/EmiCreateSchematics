@@ -40,7 +40,7 @@ public final class ClipboardScreenUtils {
                     if (lT == null) return false;
                     final List<Component> components = lT.getSiblings();
 
-                    if(components.isEmpty()) continue;
+                    if (components.isEmpty()) continue;
                     final int c = Integer.parseInt(components.get(1)
                                         .toString()
                                         .replace("literal{\n x", "")
