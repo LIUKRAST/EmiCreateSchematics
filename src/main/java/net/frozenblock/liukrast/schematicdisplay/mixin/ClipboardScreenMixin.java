@@ -27,7 +27,7 @@ public class ClipboardScreenMixin extends Screen {
 
     @Inject(at = @At("TAIL"), method = "init")
     private void init(final CallbackInfo ci) {
-        if(ClipboardScreenUtils.load(item.getTag(), false)) {
+        if (ClipboardScreenUtils.load(item.getTag(), false)) {
             final int x = ((AbstractSimiScreenMixin) this).getGuiLeft();
             final int y = ((AbstractSimiScreenMixin) this).getGuiTop() - 8;
             final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)

@@ -19,14 +19,14 @@ public final class ClipboardScreenUtils {
 
     public static boolean load(@Nullable final CompoundTag tag, final boolean save) {
         try {
-            if(tag == null) throw new Exception("Tag is null");
+            if (tag == null) throw new Exception("Tag is null");
 
             final ListTag pages = tag.getList("Pages", Tag.TAG_COMPOUND);
-            if(pages.isEmpty()) throw new Exception("Pages size is 0");
+            if (pages.isEmpty()) throw new Exception("Pages size is 0");
 
             for (int i = 0; i < pages.size(); i++) {
                 final ListTag entries = pages.getCompound(i).getList("Entries", Tag.TAG_COMPOUND);
-                if(entries.isEmpty()) throw new Exception("Entries size is 0");
+                if (entries.isEmpty()) throw new Exception("Entries size is 0");
 
                 for (int k = 0; k < entries.size(); k++) {
                     final CompoundTag entry = entries.getCompound(k);
@@ -39,7 +39,7 @@ public final class ClipboardScreenUtils {
                     if (lT == null) return false;
                     final List<Component> components = lT.getSiblings();
 
-                    if(components.isEmpty()) continue;
+                    if (components.isEmpty()) continue;
                     final int c = Integer.parseInt(components.get(1)
                                         .toString()
                                         .replace("literal{\n x", "")
