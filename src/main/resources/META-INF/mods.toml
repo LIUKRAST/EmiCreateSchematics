@@ -31,12 +31,6 @@ versionRange="0.5.1c"
 ordering="NONE"
 side="BOTH"
 [[dependencies.emi_create_schematics]]
-modId="jei"
-mandatory=true
-versionRange="11.5.0.297"
-ordering="NONE"
-side="BOTH"
-[[dependencies.emi_create_schematics]]
 modId="emi"
 mandatory=true
 versionRange="1.0.24+1.19.2"
