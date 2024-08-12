@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface AbstractSimiScreenMixin {
     @Accessor(value = "guiLeft")
     int getGuiLeft();
-
     @Accessor(value = "guiTop")
     int getGuiTop();
 }
