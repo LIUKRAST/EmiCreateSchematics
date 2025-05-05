@@ -1,10 +1,10 @@
-package net.frozenblock.liukrast.schematicdisplay.mixin;
+package net.liukrast.schematicdisplay.mixin;
 
 import net.createmod.catnip.gui.AbstractSimiScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(AbstractSimiScreen.class)
+@Mixin(value = AbstractSimiScreen.class, remap = false)
 public interface AbstractSimiScreenMixin {
     @Accessor(value = "guiLeft")
     int getGuiLeft();

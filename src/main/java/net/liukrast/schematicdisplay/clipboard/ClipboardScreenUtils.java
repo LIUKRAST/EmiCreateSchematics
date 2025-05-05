@@ -1,8 +1,8 @@
-package net.frozenblock.liukrast.schematicdisplay.clipboard;
+package net.liukrast.schematicdisplay.clipboard;
 
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.runtime.EmiFavorites;
-import net.frozenblock.liukrast.schematicdisplay.SchematicDisplay;
+import net.liukrast.schematicdisplay.SchematicDisplay;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;

@@ -1,11 +1,11 @@
-package net.frozenblock.liukrast.schematicdisplay.mixin;
+package net.liukrast.schematicdisplay.mixin;
 
 import com.simibubi.create.content.equipment.clipboard.ClipboardBlockItem;
 import com.simibubi.create.content.equipment.clipboard.ClipboardScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
-import net.frozenblock.liukrast.schematicdisplay.SchematicDisplay;
-import net.frozenblock.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
+import net.liukrast.schematicdisplay.SchematicDisplay;
+import net.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClipboardScreen.class)
+@Mixin(value = ClipboardScreen.class, remap = false)
 public class ClipboardScreenMixin extends Screen {
     @Shadow
     public ItemStack item;

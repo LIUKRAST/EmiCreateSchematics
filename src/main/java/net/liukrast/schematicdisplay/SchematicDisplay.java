@@ -1,4 +1,4 @@
-package net.frozenblock.liukrast.schematicdisplay;
+package net.liukrast.schematicdisplay;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;

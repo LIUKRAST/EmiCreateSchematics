@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.frozenblock.liukrast.schematicdisplay.mixin",
+  "package": "net.liukrast.schematicdisplay.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "emi_create_schematics.refmap.json",
   "mixins": [
