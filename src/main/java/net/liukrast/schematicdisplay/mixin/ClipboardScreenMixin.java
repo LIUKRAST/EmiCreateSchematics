@@ -1,11 +1,12 @@
-package net.frozenblock.liukrast.schematicdisplay.mixin;
+package net.liukrast.schematicdisplay.mixin;
 
+import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.equipment.clipboard.ClipboardBlockItem;
 import com.simibubi.create.content.equipment.clipboard.ClipboardScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
-import net.frozenblock.liukrast.schematicdisplay.SchematicDisplay;
-import net.frozenblock.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
+import net.liukrast.schematicdisplay.SchematicDisplay;
+import net.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -25,14 +26,14 @@ public class ClipboardScreenMixin extends Screen {
     }
 
     @Inject(at = @At("TAIL"), method = "init")
-    private void init(final CallbackInfo ci) {
-        if (ClipboardScreenUtils.load(item.getTag(), false)) {
+    private void init(CallbackInfo ci) {
+        if (ClipboardScreenUtils.load(item, false)) {
             final int x = ((AbstractSimiScreenMixin) this).getGuiLeft();
             final int y = ((AbstractSimiScreenMixin) this).getGuiTop() - 8;
             final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)
                     .withCallback(() -> {
                         if (item.getItem() instanceof ClipboardBlockItem)
-                            ClipboardScreenUtils.load(item.getTag(), true);
+                            ClipboardScreenUtils.load(item, true);
                     });
             customButton.setToolTip(Component.translatable("gui." + SchematicDisplay.MOD_ID + ".clipboard.favourite"));
             this.addRenderableWidget(customButton);

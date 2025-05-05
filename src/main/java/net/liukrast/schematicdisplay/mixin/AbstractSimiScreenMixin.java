@@ -1,4 +1,4 @@
-package net.frozenblock.liukrast.schematicdisplay.mixin;
+package net.liukrast.schematicdisplay.mixin;
 
 import net.createmod.catnip.gui.AbstractSimiScreen;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,6 +1,5 @@
-package net.frozenblock.liukrast.schematicdisplay.mixin;
+package net.liukrast.schematicdisplay.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import dev.emi.emi.EmiPort;
 import dev.emi.emi.EmiRenderHelper;
 import dev.emi.emi.api.stack.ItemEmiStack;
