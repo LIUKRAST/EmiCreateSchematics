@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@SuppressWarnings("all")
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(ItemEmiStack.class)
 public final class ItemEmiStackMixin {
     @Inject(at = @At("TAIL"), method = "render", remap = false)
@@ -23,7 +23,7 @@ public final class ItemEmiStackMixin {
         if ((flags) != 0) {
             final StringBuilder bob = new StringBuilder();
             if (((ItemEmiStack)(Object)this).getAmount() != 1)
-                bob.append(((ItemEmiStack)(Object)this).getAmount());
+                bob.append(ItemEmiStack.class.cast(this).getAmount());
             EmiRenderHelper.renderAmount(context, x, y, EmiPort.literal(bob.toString()));
         }
     }

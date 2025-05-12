@@ -15,9 +15,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = ClipboardScreen.class, remap = false)
+@Mixin(value = ClipboardScreen.class)
 public class ClipboardScreenMixin extends Screen {
-    @Shadow
+    @Shadow(remap = false)
     public ItemStack item;
 
     protected ClipboardScreenMixin(final Component p_96550_) {
