@@ -8,7 +8,6 @@
     "ItemEmiStackMixin"
   ],
   "client": [
-    "AbstractSimiScreenMixin",
     "ClipboardScreenMixin"
   ],
   "injectors": {

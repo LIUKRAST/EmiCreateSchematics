@@ -1,42 +1,42 @@
 package net.liukrast.schematicdisplay.mixin;
 
-import com.simibubi.create.AllDataComponents;
-import com.simibubi.create.content.equipment.clipboard.ClipboardBlockItem;
+import com.simibubi.create.content.equipment.clipboard.ClipboardEntry;
 import com.simibubi.create.content.equipment.clipboard.ClipboardScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
-import net.liukrast.schematicdisplay.SchematicDisplay;
+import net.createmod.catnip.gui.AbstractSimiScreen;
+import net.liukrast.schematicdisplay.EMICreateSchematics;
 import net.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClipboardScreen.class)
-public class ClipboardScreenMixin extends Screen {
-    @Shadow
-    public ItemStack item;
+import java.util.List;
 
-    protected ClipboardScreenMixin(final Component p_96550_) {
-        super(p_96550_);
+@Mixin(ClipboardScreen.class)
+public abstract class ClipboardScreenMixin extends AbstractSimiScreen {
+    @Unique
+    private static final Component emi_create_schematics$TOOLTIP = Component.translatable("gui." + EMICreateSchematics.MOD_ID + ".clipboard.favourite");
+
+    @Shadow
+    List<List<ClipboardEntry>> pages;
+
+    protected ClipboardScreenMixin(final Component ignored) {
+        super(ignored);
     }
 
     @Inject(at = @At("TAIL"), method = "init")
     private void init(CallbackInfo ci) {
-        if (ClipboardScreenUtils.load(item, false)) {
-            final int x = ((AbstractSimiScreenMixin) this).getGuiLeft();
-            final int y = ((AbstractSimiScreenMixin) this).getGuiTop() - 8;
-            final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)
-                    .withCallback(() -> {
-                        if (item.getItem() instanceof ClipboardBlockItem)
-                            ClipboardScreenUtils.load(item, true);
-                    });
-            customButton.setToolTip(Component.translatable("gui." + SchematicDisplay.MOD_ID + ".clipboard.favourite"));
-            this.addRenderableWidget(customButton);
-        }
+        if(!ClipboardScreenUtils.load(pages, false)) return;
+        final int x = guiLeft;
+        final int y = guiTop - 8;
+        final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)
+                .withCallback(() -> ClipboardScreenUtils.load(pages, true));
+        customButton.setToolTip(emi_create_schematics$TOOLTIP);
+        this.addRenderableWidget(customButton);
     }
 }
