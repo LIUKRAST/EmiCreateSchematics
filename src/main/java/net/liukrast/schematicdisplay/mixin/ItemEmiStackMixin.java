@@ -2,7 +2,6 @@ package net.liukrast.schematicdisplay.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.emi.emi.api.stack.ItemEmiStack;
-import net.liukrast.schematicdisplay.EMICreateSchematics;
 import net.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
 import net.liukrast.schematicdisplay.util.SchematicDisplayUtils;
 import net.minecraft.ChatFormatting;
@@ -14,6 +13,7 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -69,9 +69,19 @@ public final class ItemEmiStackMixin {
         long customAmount = getRealCount(underlyingStack);
 
         if (customAmount > 1) {
-            String formattedCount = String.format("%,d", customAmount);
-            Component textComponent = Component.translatable("gui." + EMICreateSchematics.MOD_ID + ".tooltip.count", formattedCount)
-                    .withStyle(ChatFormatting.GRAY);
+            MutableComponent textComponent = Component.literal("x" + customAmount).withStyle(ChatFormatting.GRAY);
+            int maxStackSize = underlyingStack.getMaxStackSize();
+            if (maxStackSize > 1) {
+                long stacks = customAmount / maxStackSize;
+                long remainder = customAmount % maxStackSize;
+                textComponent.append(Component.literal(" | ").withStyle(ChatFormatting.DARK_GRAY));
+                textComponent.append(Component.literal(String.valueOf(stacks)).withStyle(ChatFormatting.DARK_GRAY));
+                textComponent.append(Component.literal("\u25A4").withStyle(ChatFormatting.DARK_GRAY));
+                if (remainder > 0) {
+                    textComponent.append(Component.literal(" + ").withStyle(ChatFormatting.DARK_GRAY));
+                    textComponent.append(Component.literal(String.valueOf(remainder)).withStyle(ChatFormatting.DARK_GRAY));
+                }
+            }
             list.add(new ClientTextTooltip(textComponent.getVisualOrderText()));
         }
     }
