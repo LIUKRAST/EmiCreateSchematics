@@ -4,7 +4,7 @@ import com.simibubi.create.content.equipment.clipboard.ClipboardBlockItem;
 import com.simibubi.create.content.equipment.clipboard.ClipboardScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
-import net.liukrast.schematicdisplay.SchematicDisplay;
+import net.liukrast.schematicdisplay.EMICreateSchematics;
 import net.liukrast.schematicdisplay.clipboard.ClipboardScreenUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -34,7 +34,7 @@ public class ClipboardScreenMixin extends Screen {
                         if (item.getItem() instanceof ClipboardBlockItem)
                             ClipboardScreenUtils.load(item.getTag(), true);
                     });
-            customButton.setToolTip(Component.translatable("gui." + SchematicDisplay.MOD_ID + ".clipboard.favourite"));
+            customButton.setToolTip(Component.translatable("gui." + EMICreateSchematics.MOD_ID + ".clipboard.favourite"));
             this.addRenderableWidget(customButton);
         }
     }

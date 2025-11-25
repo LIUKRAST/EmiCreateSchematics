@@ -2,7 +2,7 @@ package net.liukrast.schematicdisplay.clipboard;
 
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.runtime.EmiFavorites;
-import net.liukrast.schematicdisplay.SchematicDisplay;
+import net.liukrast.schematicdisplay.EMICreateSchematics;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -55,7 +55,7 @@ public final class ClipboardScreenUtils {
             }
             return true;
         } catch (final Exception exception) {
-            SchematicDisplay.LOGGER.debug("Error during export of clipboard content to EMI list");
+            EMICreateSchematics.LOGGER.debug("Error during export of clipboard content to EMI list");
             exception.printStackTrace();
             return false;
         }
