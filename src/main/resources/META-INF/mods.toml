@@ -29,10 +29,10 @@ modId="create"
 mandatory=true
 versionRange="[0.6.0,6.1.0)"
 ordering="NONE"
-side="BOTH"
+side="CLIENT"
 [[dependencies.emi_create_schematics]]
 modId="emi"
 mandatory=true
 versionRange="1.0.24+1.19.2"
 ordering="NONE"
-side="BOTH"
+side="CLIENT"
