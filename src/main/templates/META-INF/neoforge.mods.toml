@@ -13,24 +13,28 @@ authors = "${mod_authors}"
 description = '''${mod_description}'''
 [[mixins]]
 config = "${mod_id}.mixins.json"
+
 [[dependencies."${mod_id}"]]
 modId = "neoforge"
 type = "required"
-versionRange = "${neo_version_range}"
+versionRange = "[${neo_version},)"
 ordering = "NONE"
 side = "CLIENT"
+
 [[dependencies."${mod_id}"]]
 modId = "minecraft"
 type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "CLIENT"
+
 [[dependencies."${mod_id}"]]
 modId = "create"
 type = "required"
-versionRange = "[6.0.0,6.1.0)"
+versionRange = "${create_version_range}"
 ordering = "NONE"
 side = "CLIENT"
+
 [[dependencies."${mod_id}"]]
 modId = "emi"
 type = "required"

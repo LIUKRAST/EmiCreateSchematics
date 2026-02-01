@@ -4,7 +4,6 @@
 /build/classes/java/main/
 /run/
 /.idea/
-gradlew
 gradlew.bat
 /repo/
 /libs/
