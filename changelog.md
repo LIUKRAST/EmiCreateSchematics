@@ -1,0 +1,3 @@
+- Adding items to the EMI list now deletes all the old items saved by EMI
+- Fixed some overcomplicated code
+- Renamed project to Create: EMI Schematics and updated logo
