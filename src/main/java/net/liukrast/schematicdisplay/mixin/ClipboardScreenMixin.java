@@ -31,11 +31,9 @@ public abstract class ClipboardScreenMixin extends AbstractSimiScreen {
 
     @Inject(at = @At("TAIL"), method = "init")
     private void init(CallbackInfo ci) {
-        if(!ClipboardScreenUtils.load(pages, false)) return;
         final int x = guiLeft;
         final int y = guiTop - 8;
-        final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST)
-                .withCallback(() -> ClipboardScreenUtils.load(pages, true));
+        final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST).withCallback(() -> ClipboardScreenUtils.load(pages));
         customButton.setToolTip(emi_create_schematics$TOOLTIP);
         this.addRenderableWidget(customButton);
     }

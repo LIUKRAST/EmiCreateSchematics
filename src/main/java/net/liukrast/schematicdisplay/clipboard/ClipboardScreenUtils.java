@@ -2,6 +2,7 @@ package net.liukrast.schematicdisplay.clipboard;
 
 import com.simibubi.create.content.equipment.clipboard.ClipboardEntry;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.runtime.EmiFavorite;
 import dev.emi.emi.runtime.EmiFavorites;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
@@ -12,15 +13,26 @@ import java.util.Comparator;
 import java.util.List;
 
 public final class ClipboardScreenUtils {
-    public static final String REAL_COUNT_KEY = "SchematicDisplay_RealCount";
+    public static final String REAL_COUNT_KEY = "CreateEMISchematicsData";
     private ClipboardScreenUtils() {}
 
-    public static boolean load(List<List<ClipboardEntry>> pages, final boolean save) {
-        if (!save) return true;
+    public static void load(List<List<ClipboardEntry>> pages) {
         List<ClipboardEntry> allEntries = new ArrayList<>();
         for(var page : pages)
             allEntries.addAll(page);
         allEntries.sort(Comparator.comparingInt((ClipboardEntry entry) -> entry.itemAmount).reversed());
+
+        var copiedList = new ArrayList<>(EmiFavorites.favorites);
+
+        copiedList.stream()
+                .filter(fav -> {
+                    if(!(fav.getStack() instanceof EmiStack stack)) return false;
+                    var data = stack.getItemStack().getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+
+                    if(data.isEmpty()) return false;
+                    return data.contains(REAL_COUNT_KEY);
+                })
+                .forEach(EmiFavorites::removeFavorite);
 
         for(var entry : allEntries) {
             ItemStack stack1 = entry.icon.copy();
@@ -29,8 +41,10 @@ public final class ClipboardScreenUtils {
             );
             EmiStack emiStack = EmiStack.of(stack1);
             emiStack.setAmount(1);
-            EmiFavorites.addFavorite(emiStack);
+
+
+
+            if(!entry.checked) EmiFavorites.addFavorite(emiStack);
         }
-        return true;
     }
 }
