@@ -33,7 +33,7 @@ public abstract class ClipboardScreenMixin extends AbstractSimiScreen {
     private void init(CallbackInfo ci) {
         final int x = guiLeft;
         final int y = guiTop - 8;
-        final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_WHITELIST).withCallback(() -> ClipboardScreenUtils.load(pages));
+        final IconButton customButton = new IconButton(x + 234, y + 197, AllIcons.I_SCHEMATIC).withCallback(() -> ClipboardScreenUtils.load(pages));
         customButton.setToolTip(emi_create_schematics$TOOLTIP);
         this.addRenderableWidget(customButton);
     }

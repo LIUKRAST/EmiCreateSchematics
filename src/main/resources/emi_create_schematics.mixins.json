@@ -8,7 +8,9 @@
     "ItemEmiStackMixin"
   ],
   "client": [
-    "ClipboardScreenMixin"
+    "BoMScreenMixin",
+    "ClipboardScreenMixin",
+    "EmiFavoritesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
