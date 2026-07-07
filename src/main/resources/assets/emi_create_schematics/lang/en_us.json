@@ -1,3 +1,7 @@
 {
-  "gui.emi_create_schematics.clipboard.favourite": "Transfer all items to EMI Favourites"
+  "gui.emi_create_schematics.clipboard.favourite": "Open the EMI recipe tree from this clipboard",
+  "gui.emi_create_schematics.clipboard.tree_empty": "No unchecked item requirements were found on this clipboard",
+  "gui.emi_create_schematics.clipboard.tree_output": "Schematic Materials",
+  "gui.emi_create_schematics.clipboard.tree_recipe": "Clipboard Checklist",
+  "gui.emi_create_schematics.clipboard.tree_more": "+%s more"
 }
