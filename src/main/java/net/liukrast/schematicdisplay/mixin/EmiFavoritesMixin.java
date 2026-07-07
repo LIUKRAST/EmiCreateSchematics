@@ -13,10 +13,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EmiFavoritesMixin {
     @Inject(method = "updateSynthetic", at = @At("TAIL"), remap = false)
     private static void emi_create_schematics$hideVirtualRootRecipe(EmiPlayerInventory inv, CallbackInfo ci) {
-        if (BoM.tree == null || !ClipboardTreeRecipe.isVirtual(BoM.tree.goal.recipe)) {
+        if (BoM.tree == null) {
             return;
         }
 
-        EmiFavorites.syntheticFavorites.removeIf(favorite -> ClipboardTreeRecipe.isVirtual(favorite.getRecipe()));
+        ClipboardTreeRecipe virtualRecipe = ClipboardTreeRecipe.getVirtual(BoM.tree.goal.recipe);
+        if (virtualRecipe == null) {
+            return;
+        }
+
+        if (!virtualRecipe.isCompleted() && inv.canCraft(virtualRecipe)) {
+            virtualRecipe.markCompleted();
+            BoM.craftingMode = false;
+        }
+
+        if (virtualRecipe.isCompleted()) {
+            EmiFavorites.syntheticFavorites.clear();
+            return;
+        }
+
+        EmiFavorites.syntheticFavorites.removeIf(favorite -> favorite.getRecipe() == virtualRecipe);
     }
 }

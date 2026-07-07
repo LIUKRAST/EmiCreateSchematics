@@ -15,6 +15,7 @@ import java.util.List;
 public final class ClipboardTreeRecipe extends BasicEmiRecipe {
     private static final int DISPLAYED_INPUTS = 9;
     private final Component overflowLabel;
+    private boolean completed;
 
     public ClipboardTreeRecipe(List<EmiStack> inputs, EmiStack output, ResourceLocation id) {
         super(VanillaEmiRecipeCategories.CRAFTING, id, 118, 72);
@@ -29,6 +30,18 @@ public final class ClipboardTreeRecipe extends BasicEmiRecipe {
 
     public static boolean isVirtual(EmiRecipe recipe) {
         return recipe instanceof ClipboardTreeRecipe;
+    }
+
+    public static ClipboardTreeRecipe getVirtual(EmiRecipe recipe) {
+        return recipe instanceof ClipboardTreeRecipe virtual ? virtual : null;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void markCompleted() {
+        completed = true;
     }
 
     @Override

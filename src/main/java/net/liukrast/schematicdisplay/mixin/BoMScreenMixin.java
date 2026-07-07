@@ -5,6 +5,7 @@ import dev.emi.emi.bom.MaterialNode;
 import dev.emi.emi.bom.ProgressState;
 import dev.emi.emi.screen.BoMScreen;
 import net.liukrast.schematicdisplay.clipboard.ClipboardTreeRecipe;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,7 +15,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BoMScreenMixin {
     @Inject(method = "recalculateTree", at = @At("TAIL"), remap = false)
     private void emi_create_schematics$markVirtualRootProgress(CallbackInfo ci) {
-        if (BoM.tree == null || !ClipboardTreeRecipe.isVirtual(BoM.tree.goal.recipe) || BoM.tree.goal.children == null) {
+        if (BoM.tree == null) {
+            return;
+        }
+
+        ClipboardTreeRecipe virtualRecipe = ClipboardTreeRecipe.getVirtual(BoM.tree.goal.recipe);
+        if (virtualRecipe == null || BoM.tree.goal.children == null) {
+            return;
+        }
+
+        if (!virtualRecipe.isCompleted() && Minecraft.getInstance().player != null
+                && dev.emi.emi.api.recipe.EmiPlayerInventory.of(Minecraft.getInstance().player).canCraft(virtualRecipe)) {
+            virtualRecipe.markCompleted();
+            BoM.craftingMode = false;
+        }
+
+        if (virtualRecipe.isCompleted()) {
+            emi_create_schematics$completeNode(BoM.tree.goal);
             return;
         }
 
@@ -36,6 +53,16 @@ public abstract class BoMScreenMixin {
             BoM.tree.goal.progress = ProgressState.PARTIAL;
         } else {
             BoM.tree.goal.progress = ProgressState.UNSTARTED;
+        }
+    }
+
+    private void emi_create_schematics$completeNode(MaterialNode node) {
+        node.progress = ProgressState.COMPLETED;
+        if (node.children == null) {
+            return;
+        }
+        for (MaterialNode child : node.children) {
+            emi_create_schematics$completeNode(child);
         }
     }
 }
